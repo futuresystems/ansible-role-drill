@@ -1,2 +1,59 @@
 ---
-# defaults file for ansible-role-drill
+
+################################################## install options
+drill_version: "1.7.0"
+drill_distribution: "bin"
+drill_install_prefix: "/opt"
+
+
+################################################## configuration
+
+drill_cluster_id: "drillbits1"
+drill_zookeeper_url: "localhost:2181"
+drill_max_direct_memory: "512M"
+drill_max_heap: "512M"
+
+
+
+################################################## plugins
+
+
+drill_with_hbase: false
+drill_hbase_config: "" # json string
+
+drill_with_hive: false
+drill_hive_config: ""
+
+drill_with_mongo: false
+drill_mongo_config: ""
+
+drill_with_file: false
+drill_file_config: ""
+
+
+################################################## internal
+
+
+_drill_mirror: "http://mirrors.gigenet.com/apache/drill/"
+
+_drill_name: "apache-drill-{{ drill_version }}"
+
+_drill_url_prefix: "{{ _drill_mirror }}/drill-{{ drill_version }}"
+
+_drill_bin_url: "{{ _drill_url_prefix }}/{{ _drill_name }}.tar.gz"
+
+_drill_archive:
+  1.7.0:
+    bin:
+      url: "{{ _drill_bin_url }}"
+      sha256: "b2216bd3c5a6047dc45134c22c0a0e9bac48daa9a4c5dd09b6eeed3cb83616d0"
+  1.6.0:
+    bin:
+      url: "{{ _drill_bin_url }}"
+      sha256: "3ab36cf985272d89971b9a918a2484feccc2881bcf09da611edafdce686a9502"
+
+
+_drill_package_name: "{{ _drill_archive[drill_version][drill_distribution].url | basename }}"
+_drill_extracted_name: "{{ _drill_package_name | splitext | first | splitext | first }}"
+_drill_install_path: "{{ drill_install_prefix }}/{{ _drill_extracted_name }}"
+_drill_install_name: "{{ drill_install_prefix }}/drill"
