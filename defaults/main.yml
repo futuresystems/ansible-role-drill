@@ -14,6 +14,8 @@ drill_max_direct_memory: "512M"
 drill_max_heap: "512M"
 
 
+_drill_webconsole_port: 8047
+
 
 ################################################## plugins
 
