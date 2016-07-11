@@ -37,3 +37,4 @@
     command: sh -lc "drillbit.sh start"
     creates: "{{ _drill_install_path }}/drillbit.pid"
 
+- include: plugins.yml

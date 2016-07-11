@@ -1,0 +1,13 @@
+---
+
+- include: plugin_hbase.yml
+  when: drill_with_hbase
+
+- include: plugin_hive.yml
+  when: drill_with_hive
+
+- include: plugin_mongo.yml
+  when: drill_with_mongo
+
+- include: plugin_file.yml
+  when: drill_with_file
