@@ -1,1 +1,10 @@
 ---
+
+- name: write configuration to disk
+  copy:
+    content: "{{ drill_hbase_config }}"
+    dest: "/tmp/drill_hbase.json"
+
+- name: enable hbase
+  shell:
+    command: sh -lc "http POST :{{ _drill_webconsole_port }}/storage/hbase.json name=hbase config:=@/tmp/drill_hbase.json --json"
