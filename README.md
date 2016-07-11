@@ -1,16 +1,16 @@
-# ansible-role-drill_install
-Ansible role for installing and initial configuration of Apache Drill
+# ansible-role-drill
+Ansible role for Apache Drill
 
 # Installation
 
 ```bash
-$ git submodule add https://github.com/futuresystems/ansible-role-drill_install.git roles/drill_install
+$ git submodule add https://github.com/futuresystems/ansible-role-drill.git roles/drill
 ```
 
 # Usage
 
 ```yaml
-- role: drill_install
+- role: drill
 ```
 
 # Defaults
