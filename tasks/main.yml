@@ -1,2 +1,33 @@
 ---
-# tasks file for ansible-role-drill
+
+- name: download
+  get_url:
+    url: "{{ _drill_archive[drill_version][drill_distribution].url }}"
+    checksum: "sha256:{{ _drill_archive[drill_version][drill_distribution].sha256 }}"
+    dest: "{{ ansible_env.HOME }}/{{ _drill_package_name }}"
+
+- name: extract
+  unarchive:
+    copy: false
+    dest: "{{ drill_install_path }}"
+
+- name: configure memory
+  lineinfile:
+    dest: "{{ _drill_install_path }}/conf/drill-env.sh"
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+    state: present
+  with_items:
+    - regexp: "^DRILL_MAX_DIRECT_MEMORY=.*$"
+      line: "DRILL_MAX_DIRECT_MEMORY=\"{{ drill_max_direct_memory }}\""
+    - regexp: "^DRILL_HEAP=.*$"
+      line: "DRILL_HEAD=\"{{ drill_heap }}\""
+
+- name: add environment to profile.d
+  lineinfile:
+    dest: "/etc/profile.d/drill.sh"
+    line: "export {{ item }}"
+    create: yes
+  with_items:
+    - DRILL_HOME="{{ drill_install_name }}"
+    - PATH="$PATH:$DRILL_HOME/bin"
