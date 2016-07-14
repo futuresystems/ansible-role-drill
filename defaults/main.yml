@@ -23,7 +23,10 @@ _drill_webconsole_port: 8047
 
 
 drill_with_hbase: false
-drill_hbase_config: "" # json string
+drill_hbase_config: >-
+  { "type": "hbase",
+    "enabled": true
+  }
 
 drill_with_hive: false
 drill_hive_config: ""
