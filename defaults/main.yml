@@ -4,6 +4,8 @@
 drill_version: "1.7.0"
 drill_distribution: "bin"
 drill_install_prefix: "/opt"
+drill_user: hadoop
+drill_group: hadoop
 
 
 ################################################## configuration

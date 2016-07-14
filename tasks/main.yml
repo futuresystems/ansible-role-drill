@@ -9,19 +9,27 @@
 - name: extract
   unarchive:
     copy: false
-    dest: "{{ drill_install_path }}"
+    src: "{{ ansible_env.HOME }}/{{ _drill_package_name }}"
+    dest: "{{ drill_install_prefix }}"
+
+- name: link
+  file:
+    src: "{{ _drill_install_path }}"
+    dest: "{{ _drill_install_name }}"
+    state: link
 
 - name: configure memory
   lineinfile:
-    dest: "{{ _drill_install_path }}/conf/drill-env.sh"
+    dest: "/opt/drill/conf/drill-env.sh"
     regexp: "{{ item.regexp }}"
     line: "{{ item.line }}"
+    backrefs: yes
     state: present
   with_items:
-    - regexp: "^DRILL_MAX_DIRECT_MEMORY=.*$"
-      line: "DRILL_MAX_DIRECT_MEMORY=\"{{ drill_max_direct_memory }}\""
-    - regexp: "^DRILL_HEAP=.*$"
-      line: "DRILL_HEAD=\"{{ drill_heap }}\""
+    - regexp: '^(DRILL_MAX_DIRECT_MEMORY)=".+"'
+      line: '\1="{{ drill_max_direct_memory }}"'
+    - regexp: '^(DRILL_HEAP)=".+"'
+      line: '\1="{{ drill_heap }}"'
 
 - name: add environment to profile.d
   lineinfile:
@@ -29,12 +37,19 @@
     line: "export {{ item }}"
     create: yes
   with_items:
-    - DRILL_HOME="{{ drill_install_name }}"
+    - DRILL_HOME="{{ _drill_install_name }}"
     - PATH="$PATH:$DRILL_HOME/bin"
+
+- name: fix permissions
+  file:
+    path: "{{ _drill_install_path }}"
+    owner: "{{ drill_user }}"
+    group: "{{ drill_group }}"
+    recurse: yes
 
 - name: start drillbit
   shell:
-    command: sh -lc "drillbit.sh start"
+    cmd: sh -lc "drillbit.sh start"
     creates: "{{ _drill_install_path }}/drillbit.pid"
 
 - include: plugins.yml
