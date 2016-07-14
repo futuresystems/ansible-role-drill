@@ -11,7 +11,7 @@ drill_install_prefix: "/opt"
 drill_cluster_id: "drillbits1"
 drill_zookeeper_url: "localhost:2181"
 drill_max_direct_memory: "512M"
-drill_max_heap: "512M"
+drill_heap: "512M"
 
 
 _drill_webconsole_port: 8047
