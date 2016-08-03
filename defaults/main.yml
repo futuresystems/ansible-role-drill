@@ -14,7 +14,7 @@ drill_cluster_id: "drillbits1"
 drill_zookeeper_url: "localhost:2181"
 drill_max_direct_memory: "512M"
 drill_heap: "512M"
-
+drill_wait_for_drillbit_timeout: 300
 
 _drill_webconsole_port: 8047
 

@@ -54,4 +54,11 @@
     cmd: sh -lc "drillbit.sh start"
     creates: "{{ _drill_install_path }}/drillbit.pid"
 
+- name: wait for drillbit to start
+  wait_for:
+    port: "{{ _drill_webconsole_port }}"
+    state: started
+    timeout: "{{ drill_wait_for_drillbit_timeout }}"
+
+
 - include: plugins.yml
