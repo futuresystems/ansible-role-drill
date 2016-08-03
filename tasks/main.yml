@@ -61,4 +61,5 @@
     timeout: "{{ drill_wait_for_drillbit_timeout }}"
 
 
-- include: plugins.yml
+- name: Plugins
+  include: plugins.yml

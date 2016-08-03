@@ -1,13 +1,17 @@
 ---
 
-- include: plugin_hbase.yml
+- name: hbase
+  include: plugin_hbase.yml
   when: drill_with_hbase
 
-- include: plugin_hive.yml
+- name: hive
+  include: plugin_hive.yml
   when: drill_with_hive
 
-- include: plugin_mongo.yml
+- name: mongo
+  include: plugin_mongo.yml
   when: drill_with_mongo
 
-- include: plugin_file.yml
+- name: file
+  include: plugin_file.yml
   when: drill_with_file
