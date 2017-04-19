@@ -1,7 +1,7 @@
 ---
 
 ################################################## install options
-drill_version: "1.7.0"
+drill_version: "1.10.0"
 drill_distribution: "bin"
 drill_install_prefix: "/opt"
 drill_user: hadoop
@@ -50,6 +50,10 @@ _drill_url_prefix: "{{ _drill_mirror }}/drill-{{ drill_version }}"
 _drill_bin_url: "{{ _drill_url_prefix }}/{{ _drill_name }}.tar.gz"
 
 _drill_archive:
+  1.10.0:
+    bin:
+      url: "{{ _drill_bin_url }}"
+      sha256: "92286f941cd0264eba57789d75759e7b598bf7463952dba40e81696452ea5d8a"
   1.7.0:
     bin:
       url: "{{ _drill_bin_url }}"
