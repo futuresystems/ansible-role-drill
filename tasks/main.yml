@@ -53,7 +53,7 @@
   shell:
     # the loop is a workaround concurrent drillbit starting error [DRILL-2120]
     # https://issues.apache.org/jira/browse/DRILL-2120
-    cmd: bash -lc "for i in 0 1 2 3 4 5; do drillbit.sh start; sleep 5; nc -zv localhost {{ _drill_webconsole_port }} && exit 0; done; exit 1"
+    cmd: bash -lc "for i in 0 1 2 3 4 5; do drillbit.sh restart; sleep 5; nc -zv localhost {{ _drill_webconsole_port }} && exit 0; done; exit 1"
     creates: "{{ _drill_install_path }}/drillbit.pid"
 
 - name: wait for drillbit to start
