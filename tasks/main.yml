@@ -40,6 +40,13 @@
     - DRILL_HOME="{{ _drill_install_name }}"
     - PATH="$PATH:$DRILL_HOME/bin"
 
+- name: configure overrides
+  template:
+    src: drill-override.conf.j2
+    dest: "{{ _drill_conf_drill_override }}"
+    owner: "{{ drill_user }}"
+    group: "{{ drill_group }}"
+
 - name: fix permissions
   file:
     path: "{{ _drill_install_path }}"

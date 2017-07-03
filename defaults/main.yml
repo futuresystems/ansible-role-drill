@@ -68,3 +68,4 @@ _drill_package_name: "{{ _drill_archive[drill_version][drill_distribution].url |
 _drill_extracted_name: "{{ _drill_package_name | splitext | first | splitext | first }}"
 _drill_install_path: "{{ drill_install_prefix }}/{{ _drill_extracted_name }}"
 _drill_install_name: "{{ drill_install_prefix }}/drill"
+_drill_conf_drill_override: "{{ _drill_install_name }}/conf/drill-override.conf"
